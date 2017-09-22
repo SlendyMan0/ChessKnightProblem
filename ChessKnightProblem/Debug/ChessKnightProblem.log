@@ -1,7 +1,3 @@
-﻿cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  Generation.cpp
-d:\projekty\chessknightproblem\chessknightproblem\generation.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  main.cpp
-  Generating Code...
+﻿  main.cpp
   ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Debug\ChessKnightProblem.exe
   ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Debug\ChessKnightProblem.pdb (Full PDB)

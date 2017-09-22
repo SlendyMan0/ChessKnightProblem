@@ -11,6 +11,11 @@ Generation::Generation() {
 Generation::Generation(pos start) {
 	srand(time(NULL));
 
+	file.open("results.txt", ios::trunc | ios::out);
+	if (file.good() != true) {
+		exit(-1);
+	}
+
 	vector<char> tempSteps;
 
 	for (int i = 0; i < POPULATION_SIZE; i++) {
@@ -41,6 +46,8 @@ Generation::~Generation() {
 	this->population.clear();
 
 	delete this->board;
+
+	file.close();
 }
 
 int Generation::moveGeneration() {
@@ -49,6 +56,7 @@ int Generation::moveGeneration() {
 	*/
 
 	printf("Gen no. %7i processing. ", genNumber);
+	file << genNumber << ";";
 
 	for (int i = 0; i < POPULATION_SIZE; i++) {
 		if (this->attemptFullMove(i)) {
@@ -58,6 +66,7 @@ int Generation::moveGeneration() {
 	}
 
 	printf("Max fitness: %5i. Max gen fitness: %5i\n", maxFitness, genMaxFitness);
+	file << maxFitness << ";" << genMaxFitness << ";\n";
 
 	return maxFitnessKnight;
 }

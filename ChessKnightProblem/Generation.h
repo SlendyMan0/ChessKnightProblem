@@ -10,6 +10,7 @@ class Generation {
 	vector<ChessKnight*> prevpopulation;
 	Board* board;
 	int genNumber;
+	fstream file;
 
 public:
 	Generation();

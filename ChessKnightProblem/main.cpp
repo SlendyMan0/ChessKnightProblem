@@ -1,7 +1,7 @@
 #include "main.h"
 
 int main(int argc, char* argv[]) {
-	Generation gen = Generation::Generation({ 3, 3 });
+	Generation gen({ 3, 3 });
 	int knight = 0;
 
 	while (1) {

@@ -3,10 +3,5 @@
   Generation.cpp
 Generation.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   main.cpp
-  Generating code
-  106 of 505 functions (21.0%) were compiled, the rest were copied from previous compilation.
-    1 functions were new in current compilation
-    36 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Release\ChessKnightProblem.exe
-  ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Release\ChessKnightProblem.pdb (Full PDB)
+main.cpp(4): error C2280: 'Generation::Generation(const Generation &)': attempting to reference a deleted function
+  d:\projekty\chessknightproblem\chessknightproblem\Generation.h(31): note: compiler has generated 'Generation::Generation' here

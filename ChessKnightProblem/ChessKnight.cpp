@@ -7,13 +7,14 @@ ChessKnight::ChessKnight() {
 ChessKnight::ChessKnight(pos startPos) {
 	this->startPos = startPos;
 	this->fitness = 0;
+	this->stepsMade = 0;
 }
 
 ChessKnight::~ChessKnight() {
 }
 
 char ChessKnight::getStep() {
-	return this->step[fitness];//we use fitness as our iterator
+	return this->step[stepsMade];
 }
 
 vector<char> ChessKnight::getAllSteps() {
@@ -32,10 +33,18 @@ int ChessKnight::getFitness() {
 	return this->fitness;
 }
 
-void ChessKnight::addFitness() {
-	this->fitness++;
+void ChessKnight::addFitness(int n) {
+	this->fitness+=n;
 }
 
 void ChessKnight::resetFitness() {
 	this->fitness = 0;
+}
+
+void ChessKnight::setStepsMade(int n) {
+	this->stepsMade = n;
+}
+
+int ChessKnight::getStepsMade() {
+	return this->stepsMade;
 }

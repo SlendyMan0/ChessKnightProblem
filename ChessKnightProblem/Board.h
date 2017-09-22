@@ -12,10 +12,13 @@ public:
 	Board();
 	~Board();
 
-	bool moveKnight(char dest);
+	int moveKnight(char dest);
 	int getMoveCounter();
 	void clearField();
 	void setCurrentPos(pos startPos);
 	void printBoard();
+
+private:
+	int calculatePossibleMoves(pos currentPos);
 };
 

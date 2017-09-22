@@ -3,10 +3,9 @@
 
 Board::Board() {
 	vector<int> temp;
-	int temp2 = -1;
 
 	for (int i = 0; i < 8; i++) {
-		temp.push_back(temp2);
+		temp.push_back(-1);
 	}
 
 	for (int i = 0; i < 8; i++) {
@@ -18,12 +17,10 @@ Board::Board() {
 	this->moveCounter = 0;
 }
 
-
-
 Board::~Board() {
 }
 
-bool Board::moveKnight(char dest) {
+int Board::moveKnight(char dest) {
 
 	/*
 	*
@@ -40,6 +37,10 @@ bool Board::moveKnight(char dest) {
 	*/
 
 	pos destPos;
+	pos tempPos;
+
+	tempPos.x = this->currentPos.x;
+	tempPos.y = this->currentPos.y;
 
 	switch (dest) //calculating destination of knight based on the move type
 	{
@@ -76,36 +77,31 @@ bool Board::moveKnight(char dest) {
 		destPos.y = this->currentPos.y - 1;
 		break;
 	default:
-		return false;
+		//cout << "wrong move code\n";
+		return 0;
 		break;
 	}
 
 	if (destPos.x < 0 || destPos.x > 7) { //move outside the playing field on x axis
-		//cout << "End: Field outside board range.\n" << destPos.x << "," << destPos.y;
-		//fflush(stdin);
-		return false;
+		//cout << "code: " << dest <<" | x axis\n";
+		return calculatePossibleMoves(tempPos);
 	}
-
-	if (destPos.y < 0 || destPos.y > 7) { //move outside the playing field on y axis
-		//cout << "End: Field outside board range.\n" << destPos.x << "," << destPos.y;;
-		//fflush(stdin);
-		return false;
+	else if (destPos.y < 0 || destPos.y > 7) { //move outside the playing field on y axis
+		//cout << "code: " << dest << " | y axis\n";
+		return calculatePossibleMoves(tempPos);
 	}
-
-	if (this->field[destPos.x][destPos.y] == -1) { //not already steped on
+	else if (this->field[destPos.x][destPos.y] != -1) { //already steped on
+		//cout << "code: " << dest << " | already moved\n";
+		return calculatePossibleMoves(tempPos);
+	}
+	else {
 		field[destPos.x][destPos.y] = ++moveCounter;
 
 		currentPos.x = destPos.x;
 		currentPos.y = destPos.y;
-		
 
-		return true;
-	}
-	else {
-		//cout << "End: Field already stepped on.\n";
-		//fflush(stdin);
-
-		return false;
+		//cout << "code: " << dest << " | correct move\n";
+		return -1;
 	}
 }
 
@@ -132,10 +128,69 @@ void Board::setCurrentPos(pos startPos) {
 void Board::printBoard() {
 	for (int i = 0; i < 8; i++) {
 		for (int j = 0; j < 8; j++) {
-			printf("%3i ", this->field[i][j]);
+			if (this->field[i][j] != -1) {
+				printf("%3i ", this->field[i][j]);
+			}
+			else
+			{
+				printf("  x ");
+			}
 		}
 		cout << "\n";
 	}
 	cout << "\n";
 }
 
+int Board::calculatePossibleMoves(pos currentPos) {
+	vector<pos> destPosVec;
+	pos destPos;
+	int possibleMoves = 8;
+
+	destPos.x = currentPos.x - 1;
+	destPos.y = currentPos.y - 2;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x + 1;
+	destPos.y = currentPos.y - 2;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x + 2;
+	destPos.y = currentPos.y - 1;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x + 2;
+	destPos.y = currentPos.y + 1;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x + 1;
+	destPos.y = currentPos.y + 2;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x - 1;
+	destPos.y = currentPos.y + 2;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x - 2;
+	destPos.y = currentPos.y + 1;
+	destPosVec.push_back(destPos);
+
+	destPos.x = currentPos.x - 2;
+	destPos.y = currentPos.y - 1;
+	destPosVec.push_back(destPos);
+
+	for (unsigned int i = 0; i < destPosVec.size(); i++) {
+		if (destPosVec[i].x < 0 || destPosVec[i].x > 7) { //move outside the playing field on x axis
+			possibleMoves--;
+		}
+		else if (destPosVec[i].y < 0 || destPosVec[i].y > 7) { //move outside the playing field on y axis
+			possibleMoves--;
+		}
+		else if (this->field[destPosVec[i].x][destPosVec[i].y] != -1) {
+			possibleMoves--;
+		}
+	}
+
+	destPosVec.clear();
+
+	return (int)((64 - moveCounter)*possibleMoves/8);
+}

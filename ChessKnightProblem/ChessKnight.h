@@ -7,6 +7,7 @@ class ChessKnight {
 	vector<char> step;
 	pos startPos;
 	int fitness;
+	int stepsMade;
 
 public:
 	ChessKnight();
@@ -20,7 +21,9 @@ public:
 	pos getStartPos();
 
 	int getFitness();
-	void addFitness();
+	void addFitness(int n);
 	void resetFitness();
+	void setStepsMade(int n);
+	int getStepsMade();
 };
 

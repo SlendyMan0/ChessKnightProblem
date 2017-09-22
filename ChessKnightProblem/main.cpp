@@ -2,17 +2,21 @@
 
 int main(int argc, char* argv[]) {
 	Generation gen = Generation::Generation({ 3, 3 });
-	int winningKnight = -1;
+	int knight = 0;
 
-	while (winningKnight == -1) {
-		winningKnight = gen.moveGeneration();
+	while (1) {
+		knight = gen.moveGeneration();
+		if (gen.getKnightFitness(knight) == 640) {
+			gen.printKnight(knight);
+			break;
+		}
+		if (GetAsyncKeyState(VK_ESCAPE)) {
+			gen.printKnight(gen.currentBest());
+			break;
+		}
 		gen.evolveGeneration();
 		//system("pause > nul");
 	}
-	
-	gen.printKnight(winningKnight);
-
-	/*gen.moveGeneration();*/
 
 	system("pause > nul");
 

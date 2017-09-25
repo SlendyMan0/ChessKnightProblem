@@ -77,21 +77,17 @@ int Board::moveKnight(char dest) {
 		destPos.y = this->currentPos.y - 1;
 		break;
 	default:
-		//cout << "wrong move code\n";
 		return 0;
 		break;
 	}
 
 	if (destPos.x < 0 || destPos.x > 7) { //move outside the playing field on x axis
-		//cout << "code: " << dest <<" | x axis\n";
 		return calculatePossibleMoves(tempPos);
 	}
 	else if (destPos.y < 0 || destPos.y > 7) { //move outside the playing field on y axis
-		//cout << "code: " << dest << " | y axis\n";
 		return calculatePossibleMoves(tempPos);
 	}
 	else if (this->field[destPos.x][destPos.y] != -1) { //already steped on
-		//cout << "code: " << dest << " | already moved\n";
 		return calculatePossibleMoves(tempPos);
 	}
 	else {
@@ -100,7 +96,6 @@ int Board::moveKnight(char dest) {
 		currentPos.x = destPos.x;
 		currentPos.y = destPos.y;
 
-		//cout << "code: " << dest << " | correct move\n";
 		return -1;
 	}
 }
@@ -125,20 +120,37 @@ void Board::setCurrentPos(pos startPos) {
 	this->currentPos.y = startPos.y;
 }
 
-void Board::printBoard() {
+string Board::printBoard() {
+	string printedBoard;
+
+	printedBoard += "   [ 1][ 2][ 3][ 4][ 5][ 6][ 7][ 8]\n";
 	for (int i = 0; i < 8; i++) {
+		printedBoard += "[";
+		printedBoard += to_string(i + 1);
+		printedBoard += "]";
 		for (int j = 0; j < 8; j++) {
 			if (this->field[i][j] != -1) {
-				printf("%3i ", this->field[i][j]);
+				if (this->field[i][j] < 10) {
+					printedBoard += "  ";
+					printedBoard += to_string(this->field[i][j]);
+					printedBoard += " ";
+				}
+				else {
+					printedBoard += " ";
+					printedBoard += to_string(this->field[i][j]);
+					printedBoard += " ";
+				}
 			}
 			else
 			{
-				printf("  x ");
+				printedBoard += "  x ";
 			}
 		}
-		cout << "\n";
+		printedBoard += "\n";
 	}
-	cout << "\n";
+	printedBoard += "\n";
+
+	return printedBoard;
 }
 
 int Board::calculatePossibleMoves(pos currentPos) {

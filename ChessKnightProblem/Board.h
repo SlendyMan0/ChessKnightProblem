@@ -16,7 +16,7 @@ public:
 	int getMoveCounter();
 	void clearField();
 	void setCurrentPos(pos startPos);
-	void printBoard();
+	string printBoard();
 
 private:
 	int calculatePossibleMoves(pos currentPos);

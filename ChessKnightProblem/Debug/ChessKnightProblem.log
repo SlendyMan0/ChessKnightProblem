@@ -1,6 +1,0 @@
-﻿  main.cpp
-  Generation.cpp
-d:\projekty\chessknightproblem\chessknightproblem\generation.cpp(12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
-  ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Debug\ChessKnightProblem.exe
-  ChessKnightProblem.vcxproj -> D:\Projekty\ChessKnightProblem\Debug\ChessKnightProblem.pdb (Full PDB)

@@ -166,7 +166,6 @@ void Generation::evolveGeneration() {
 		if (maxFitness[0] == maxFitness[1]) {//checking if progress was made
 			if (compareKnights()) {//comparing individual knights
 				refreshPopulation();
-				system("pause > nul");
 			}
 		}
 
@@ -196,9 +195,9 @@ void Generation::mutateGeneration() {
 	*
 	* each individual gets one of his steps mutated by randomly changing his step code
 	*/
-	int mutationChance = (int)(popSize / 25);//value used to determine amount of mutations, bigger for bigger populations
+	int mutationChance = (int)(popSize / 100);//value used to determine amount of mutations, bigger for bigger populations
 	if (mutationChance == 0) mutationChance = 1;//making sure that there is always at least one mutation
-	for (int i = 0; i < (int)(genMaxFitness / (10 * mutationChance)); i++) {
+	for (int i = 0; i < (int)((genMaxFitness / 40) * mutationChance); i++) {
 		mutatingKnightIndex = rand() % this->popSize; //selecting knight index
 		mutatingStepIndex = rand() % 64;//selecting step index
 		mutationValue = rand() % 8;//this number will determine by how much will we shift step code from a to g and wrapping around

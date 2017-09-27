@@ -1,2 +1,2 @@
 @ECHO OFF
-ChessKnightProblem.exe 128 4 5
+ChessKnightProblem.exe 512 1 1
